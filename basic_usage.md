@@ -8,7 +8,7 @@
 
 1. Client-side CLI tool to encrypt secrets and create sealed secrets
 2. Server-side controller used to decrypt sealed secrets and create secrets
-
+![install controller](image/install_controller.png )
 To install the controller in our Kubernetes cluster we’ll use the official Helm chart from the [sealed-secrets repository](https://github.com/bitnami-labs/sealed-secrets/tree/main/helm/sealed-secrets).
 
 Add the repository and install it to the `kube-system` namespace:
@@ -18,7 +18,7 @@ helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
 
 helm install sealed-secrets --namespace kube-system --version 1.13.2 sealed-secrets/sealed-secrets
 ```
-
+![helm](image/helm_repo.png )
 ### CLI tool installation
 Secrets are encrypted client-side using the kubeseal CLI tool.
 For macOS, we can use the Homebrew formula. For Linux, we can download the binary from the GitHub release page.
@@ -94,7 +94,7 @@ data:
 ```
 Everything went well. The secret has been successfully unsealed.
 
-
+![install controller](image/deploy_sealed_secret.png )
 
 Reference:
 https://www.arthurkoziel.com/encrypting-k8s-secrets-with-sealed-secrets

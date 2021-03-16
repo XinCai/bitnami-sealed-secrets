@@ -96,6 +96,8 @@ Everything went well. The secret has been successfully unsealed.
 
 ![install controller](image/deploy_sealed_secret.png )
 
+![aks secret](image/aks_secret.png )
+
 Reference:
 https://www.arthurkoziel.com/encrypting-k8s-secrets-with-sealed-secrets
 

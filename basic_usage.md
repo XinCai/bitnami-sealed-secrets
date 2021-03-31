@@ -4,21 +4,37 @@
 
 ### Installation via Helm chart
 
-#### Sealed Secrets consists of two components:
+### Sealed Secrets consists of two components:
 
 1. Client-side CLI tool to encrypt secrets and create sealed secrets
-2. Server-side controller used to decrypt sealed secrets and create secrets
+   安装 client tool: 
+   ```
+   Linux x86_64: 
+   
+   wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/kubeseal-linux-amd64 -O kubeseal
+   sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+   ```
+   
+   ```
+   Macos: (might lag a few hours behind a new release, this icon will reflect that latest release)
+   
+   brew install kubeseal
+   ```
+   
+2. Server-side (Cluster side) controller used to decrypt sealed secrets and create secrets
 ![install controller](image/install_controller.png )
 To install the controller in our Kubernetes cluster we’ll use the official Helm chart from the [sealed-secrets repository](https://github.com/bitnami-labs/sealed-secrets/tree/main/helm/sealed-secrets).
 
 Add the repository and install it to the `kube-system` namespace:
 
+安装版本
 ```
 helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
 
 helm install sealed-secrets --namespace kube-system --version 1.13.2 sealed-secrets/sealed-secrets
 ```
-or you can install via this way
+or you can install via this way 安装最新版本
+版本号码：[v0.15.0](https://github.com/bitnami-labs/sealed-secrets/releases)
 ```
 kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/controller.yaml
 ```

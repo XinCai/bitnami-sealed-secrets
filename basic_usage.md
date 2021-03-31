@@ -38,6 +38,8 @@ or you can install via this way 安装最新版本
 ```
 kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/controller.yaml
 ```
+![installation] (https://github.com/XinCai/bitnami-sealed-secrets/blob/125b4f6f5927332aad5c85089417e8ddc981747f/image/install_kubeseal.png)
+
 ![helm](image/helm_repo.png )
 ### CLI tool installation
 Secrets are encrypted client-side using the kubeseal CLI tool.

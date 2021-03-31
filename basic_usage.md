@@ -18,6 +18,10 @@ helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
 
 helm install sealed-secrets --namespace kube-system --version 1.13.2 sealed-secrets/sealed-secrets
 ```
+or you can install via this way
+```
+kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/controller.yaml
+```
 ![helm](image/helm_repo.png )
 ### CLI tool installation
 Secrets are encrypted client-side using the kubeseal CLI tool.

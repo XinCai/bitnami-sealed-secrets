@@ -8,10 +8,36 @@ kubernetes secret management tool -- bitnami
 [Bitnami offcial website](https://github.com/bitnami-labs/sealed-secrets#sealed-secrets-for-kubernetes)
 
 #### Installation 
+
 ```
 helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
 ```
 
+#### Installing the kubeseal client
+
+Client side
+Install client-side tool into /usr/local/bin/:
+
+For Linux x86_64 systems, the client-tool may be installed into /usr/local/bin with the following command:
+
+```
+wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/kubeseal-linux-amd64 -O kubeseal
+sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+```
+
+Macos: (might lag a few hours behind a new release, this icon will reflect that latest release)
+```
+brew install kubeseal
+```
+
+### Cluster side Installation (Installing the custom controller and CRD for SealedSecret)
+
+Install SealedSecret CRD, server-side controller into kube-system namespace.
+
+```
+$ kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/controller.yaml
+
+```
 
 #### Usage
 ```

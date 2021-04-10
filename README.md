@@ -98,4 +98,7 @@ kubeseal --re-encrypt <my_sealed_secret.json >tmp.json \
 ```
 
 
+## 多个 集群 cluster 中使用 sealed secret 
+
+copy private key from 1st culster 到 2nd cluster
 

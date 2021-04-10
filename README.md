@@ -79,4 +79,8 @@ kubeseal --fetch-cert
 4. 查看 kube-system 的secret  `kubectl get secrets -n kube-system`, 可以看到 有多了一个 sealed-secret 在 kube-system 里面
 
 
+### 打印 kubeseal log
 
+```
+kubeseal -v 10 ....
+```

@@ -79,8 +79,23 @@ kubeseal --fetch-cert
 4. 查看 kube-system 的secret  `kubectl get secrets -n kube-system`, 可以看到 有多了一个 sealed-secret 在 kube-system 里面
 
 
-### 打印 kubeseal log
+### 打印 kubeseal log 命令
 
 ```
 kubeseal -v 10 ....
 ```
+
+### 重新给 sealed-secret 来加密的命令
+
+假设 kubeseal controller 更新了 private key (在 controller side)
+
+如何来 重新 更新 现在已经有的 sealed secret -- Re-encryption (advanced) 
+
+```
+kubeseal --re-encrypt <my_sealed_secret.json >tmp.json \
+  && mv tmp.json my_sealed_secret.json
+
+```
+
+
+

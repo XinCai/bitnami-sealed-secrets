@@ -159,12 +159,27 @@ kubectl apply -f sealed-secret.yaml
 ```
 After applying the file, the controller will update the Secret automatically and remove the api_key.
 
-### Delete the sealed secret
+### 删除 sealed secret
 To delete the secret, we use kubectl to delete the resource:
 ```
 kubectl delete -f sealed-secret.yaml
 ```
 This will delete the SealedSecret resource from the cluster as well as the corresponding Secret resource.
+
+
+### 检查集群中 sealed secret 命令
+
+```
+kubectl get sealedsecrets -n my-some-namespace 
+```
+
+### 检查 集群中 secret (from sealed secret)
+
+```
+kubectl get secrets -n my-some-namespace
+```
+
+
 
 ## Conclusion
 

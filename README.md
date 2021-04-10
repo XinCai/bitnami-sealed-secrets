@@ -58,6 +58,25 @@ $ kubectl get secret mysecret
 ```
 ### 打印 public cert of kubeseal 
 
+保存到 git repo 中， 做为 public key 来加密 
 ```
 kubeseal --fetch-cert
 ```
+
+### private key rotation
+
+1. 下载 kubeseal controller `wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/controller.yaml -O controller.yaml`
+
+2. 更新 kubeseal controller yaml 里面的配置，`--key-renew-period=<value>` flag for the command in the pod template of the sealed secret controller.
+   ```
+   containers:
+     args:
+       -- "--key-renew-period"
+       -- "you can paste your current date time, copy/paste it here"
+   ```
+
+3. 再重新部署 kubeseal的 `kubectl apply -f controller.yaml` 后， 更新了（添加了） 新的private key
+4. 查看 kube-system 的secret  `kubectl get secrets -n kube-system`, 可以看到 有多了一个 sealed-secret 在 kube-system 里面
+
+
+

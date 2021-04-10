@@ -13,7 +13,7 @@ kubernetes secret management tool -- bitnami
 helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
 ```
 
-#### Installing the kubeseal client
+#### 客户端工具 Installing the kubeseal client
 
 Client side
 Install client-side tool into /usr/local/bin/:
@@ -30,7 +30,7 @@ Macos: (might lag a few hours behind a new release, this icon will reflect that 
 brew install kubeseal
 ```
 
-### Cluster side Installation (Installing the custom controller and CRD for SealedSecret)
+### 在集群方向安装 (Installing the custom controller and CRD for SealedSecret)
 
 Install SealedSecret CRD, server-side controller into kube-system namespace.
 

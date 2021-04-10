@@ -39,7 +39,7 @@ $ kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/downl
 
 ```
 
-#### Usage
+#### 常用命令
 ```
 # Create a json/yaml-encoded Secret somehow:
 # (note use of `--dry-run` - this is just a local file!)
@@ -55,4 +55,9 @@ $ kubectl create -f mysealedsecret.json
 
 # Profit!
 $ kubectl get secret mysecret
+```
+### 打印 public cert of kubeseal 
+
+```
+kubeseal --fetch-cert
 ```

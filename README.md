@@ -56,6 +56,13 @@ $ kubectl create -f mysealedsecret.json
 # Profit!
 $ kubectl get secret mysecret
 ```
+### offline 使用 Kubeseal (public key / certificate 来 seal secrets)
+
+1. 首先你的有 access 到 Kubernetes API server
+2. 使用 `kubeseal` 来获取 certificate from controller （runtime 运行时）， fetch cert 命令 `kubeseal --fetch-cert > mycert.pem`
+3. 在 offline 使用 `kubeseal --cert mycert.pem`
+[sealed secret](https://github.com/bitnami-labs/sealed-secrets#public-key--certificate)
+
 ### 打印 public cert of kubeseal 
 
 保存到 git repo 中， 做为 public key 来加密 

@@ -38,6 +38,55 @@ $ kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/downl
 
 ```
 
+### 加密 K8S secret
+
+kubeseal encrypts the Secret using the public key that it fetches at runtime from the controller running in the Kubernetes cluster. If a user does not have direct access to the cluster, then a cluster administrator may retrieve the public key from the controller logs and make it accessible to the user. 
+
+导出 public cert from controller
+
+```
+kubeseal --fetch-cert >mycert.pem 
+```
+You need client tool `kubectl` to create secret.yaml
+
+```
+kubectl create secret generic mysecret --dry-run=client --from-literal=foo=bar -o yaml >mysecret.yaml
+```
+
+```
+apiVersion: v1
+data:
+  foo: YmFy
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: mysecret
+```
+
+```
+kubeseal --format=yaml --cert=mycert.pem < mysecret.yaml > sealed-secret.yaml
+```
+
+加密后的 yaml 文件
+
+```
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: mysecret
+  namespace: default
+spec:
+  encryptedData:
+    foo: AgChrDA8LpLG769MVbLt2CFTFlnIC7a54SBmvg6cgy2UMkwUIYsHcu1RJqzGLHGLub/4tP74/D7E8v/KHS/3bqU7IcpYlVuSa0ggMrOICXZx7K/MkhXe+2CXrwRW/pXIVyjFRDIoDZLtv2pSxBtYzNDQCMwsNhStJwWi/6mMg1BWRQeOJlO6FCg+/mPftALgPJvdU6y2YF65cnTcdzguisGaBLQz6eMt4jQjX9ZUNHHJiv53bqA+r3K71EvJw1mkxTxw3PjpaLhJ7Blm1H4VpgmaLfWUC7mwqPIJqLBsZMa4jPNJYQv8YTFghfpLSgNjLro3SiIMvdnz9oqJ6yVtZ0pieFKgxs24CKEr3H56VW2Pe0/n4b1zqewxa7XMqdWBg5jp4MbvlnKGQYDx8zPy3nimP57FPmr8cyn7vhdy57YuNGGPNUGBkhU7CfCdSnMJs84aRvBq6CobC2bUqFRCjvNSubqQQIVl0nPPlsJXwD8uB8clutHYsniPpcUIv1ejh1or9a1Qr5jkxSPYF2Ms13nby6bhEtVqdNesSNyrhM5UHpzV8ptZ7RBqdhMZq5CAkgFhhF9XjL3dY4QzxVrM8Ye92HII3K8Bv7HrfZnNvYcHpfd0QpdVnpjv00D97d1FDIbd1x8Va5HjrGxxyjs+nWYNKyf2CGVGAmxRhFAEABcNLe0Xkw92vTirGMN7WduVUpjjbPo=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: mysecret
+```
+
+可以部署到 kubernetes 的集群当中。
+
 #### 常用命令
 ```
 # Create a json/yaml-encoded Secret somehow:
